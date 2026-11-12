@@ -15,3 +15,27 @@ FROM animais a
 INNER JOIN tutores t
     ON a.id_tutor = t.id_tutor
 ORDER BY a.nome;
+
+
+-- CONSULTA 02
+-- Historico de consultas e atendimentos dos animais.
+
+SELECT
+    a.nome AS nome_animal,
+    t.nome AS nome_tutor,
+    v.nome AS nome_veterinario,
+    c.data_hora,
+    c.tipo_consulta,
+    c.status,
+    at.diagnostico,
+    at.procedimentos
+FROM consultas c
+INNER JOIN animais a
+    ON c.id_animal = a.id_animal
+INNER JOIN tutores t
+    ON a.id_tutor = t.id_tutor
+INNER JOIN veterinarios v
+    ON c.id_veterinario = v.id_veterinario
+LEFT JOIN atendimentos at
+    ON c.id_consulta = at.id_consulta
+ORDER BY c.data_hora DESC;
