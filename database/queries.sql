@@ -39,3 +39,28 @@ INNER JOIN veterinarios v
 LEFT JOIN atendimentos at
     ON c.id_consulta = at.id_consulta
 ORDER BY c.data_hora DESC;
+
+
+-- CONSULTA 03
+-- Lista as consultas agendadas dos veterinarios.
+
+SELECT
+    c.id_consulta,
+    v.nome AS nome_veterinario,
+    a.nome AS nome_animal,
+    t.nome AS nome_tutor,
+    t.telefone,
+    c.data_hora,
+    c.tipo_consulta,
+    c.status,
+    c.motivo
+FROM consultas c
+INNER JOIN veterinarios v
+    ON c.id_veterinario = v.id_veterinario
+INNER JOIN animais a
+    ON c.id_animal = a.id_animal
+INNER JOIN tutores t
+    ON a.id_tutor = t.id_tutor
+WHERE c.status = 'AGENDADA'
+ORDER BY c.data_hora ASC;
+
