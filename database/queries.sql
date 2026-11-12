@@ -64,3 +64,22 @@ INNER JOIN tutores t
 WHERE c.status = 'AGENDADA'
 ORDER BY c.data_hora ASC;
 
+
+-- CONSULTA 04
+-- Pesquisa de animais pelo nome OU pelo nome do tutor.
+
+SELECT
+    a.id_animal,
+    a.nome AS nome_animal,
+    a.especie,
+    a.raca,
+    t.nome AS nome_tutor,
+    t.telefone
+FROM animais a
+INNER JOIN tutores t
+    ON a.id_tutor = t.id_tutor
+WHERE
+    a.nome ILIKE '%Luna%'
+    OR t.nome ILIKE '%Maria%'
+ORDER BY a.nome;
+
