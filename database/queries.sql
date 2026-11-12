@@ -83,3 +83,18 @@ WHERE
     OR t.nome ILIKE '%Maria%'
 ORDER BY a.nome;
 
+-- CONSULTA 05
+-- Quantidade total de consultas por veterinario.
+
+SELECT
+    v.id_veterinario,
+    v.nome AS nome_veterinario,
+    COUNT(c.id_consulta) AS total_consultas
+FROM veterinarios v
+LEFT JOIN consultas c
+    ON v.id_veterinario = c.id_veterinario
+GROUP BY
+    v.id_veterinario,
+    v.nome
+ORDER BY total_consultas DESC;
+
